@@ -38,100 +38,99 @@ function App() {
   }
 
   return (
-  <div className="page">
-    <Header />
-    <Main
-      onEditAvatar={handleAvatarClick}
-      onEditProfile={handleProfileClick}
-      onAddPlace={handleAddCardClick}
-      onCardClick={handleCardClick}
-    />
-    <Footer />
-
-              {/*  Popups  */}
-
-    <ImagePopup card={selectedCard} onClose={closeAllPopups} />
-
-    <PopupWithForm
-      name={'avatar'}
-      title={'Обновить аватар'}
-      isOpen={isEditAvatarPopupOpen}
-      onClose={closeAllPopups}
-    >
-      <input
-        id="avatar-link"
-        className="popup__input-text"
-        type="url"
-        placeholder="Ссылка на новый аватар"
-        required
+    <>
+      <Header />
+      <Main
+        onEditAvatar={handleAvatarClick}
+        onEditProfile={handleProfileClick}
+        onAddPlace={handleAddCardClick}
+        onCardClick={handleCardClick}
       />
-      <span id="avatar-link-error" className="popup__input-error"></span>
-      <button className="popup__accept button-hover" type="submit">Сохранить</button>
-    </PopupWithForm>
+      <Footer />
 
-    <PopupWithForm
-      name={'profile'}
-      title={'Редактировать профиль'}
-      isOpen={isEditProfilePopupOpen}
-      onClose={closeAllPopups}
-    >
-      <input
-        id="name"
-        className="popup__input-text"
-        type="text"
-        placeholder="Имя"
-        minLength="2"
-        maxLength="40"
-        required
-      />
-      <span id="name-error" className="popup__input-error"></span>
-      <input
-        id="vocation"
-        className="popup__input-text"
-        type="text"
-        placeholder="О себе"
-        minLength="2"
-        maxLength="200"
-        required
-      />
-      <span id="vocation-error" className="popup__input-error"></span>
-      <button className="popup__accept button-hover" type="submit">Сохранить</button>
-    </PopupWithForm>
+                {/*  Popups  */}
 
-    <PopupWithForm
-      name={'card'}
-      title={'Новое место'}
-      isOpen={isAddPlacePopupOpen}
-      onClose={closeAllPopups}
-    >
-      <input
-        id="title"
-        className="popup__input-text"
-        type="text"
-        placeholder="Название"
-        minLength="2"
-        maxLength="30"
-        required
-      />
-      <span id="title-error" className="popup__input-error"></span>
-      <input
-        id="link"
-        className="popup__input-text"
-        type="url"
-        placeholder="Ссылка на картинку"
-        required
-      />
-      <span id="link-error" className="popup__input-error"></span>
-      <button className="popup__accept button-hover" type="submit">Создать</button>
-    </PopupWithForm>
+      <ImagePopup card={selectedCard} onClose={closeAllPopups} />
 
-    <PopupWithForm
-      name={'trash-accept'}
-      title={'Вы уверены?'}
-    >
-      <button className="popup__accept button-hover" type="submit">Да</button>
-    </PopupWithForm>
-  </div>
+      <PopupWithForm
+        name={'avatar'}
+        title={'Обновить аватар'}
+        isOpen={isEditAvatarPopupOpen}
+        onClose={closeAllPopups}
+        submitButtonText={'Сохранить'}
+      >
+        <input
+          id="avatar-link"
+          className="popup__input-text"
+          type="url"
+          placeholder="Ссылка на новый аватар"
+          required
+        />
+        <span id="avatar-link-error" className="popup__input-error"></span>
+      </PopupWithForm>
+
+      <PopupWithForm
+        name={'profile'}
+        title={'Редактировать профиль'}
+        isOpen={isEditProfilePopupOpen}
+        onClose={closeAllPopups}
+        submitButtonText={'Сохранить'}
+      >
+        <input
+          id="name"
+          className="popup__input-text"
+          type="text"
+          placeholder="Имя"
+          minLength="2"
+          maxLength="40"
+          required
+        />
+        <span id="name-error" className="popup__input-error"></span>
+        <input
+          id="vocation"
+          className="popup__input-text"
+          type="text"
+          placeholder="О себе"
+          minLength="2"
+          maxLength="200"
+          required
+        />
+        <span id="vocation-error" className="popup__input-error"></span>
+      </PopupWithForm>
+
+      <PopupWithForm
+        name={'card'}
+        title={'Новое место'}
+        isOpen={isAddPlacePopupOpen}
+        onClose={closeAllPopups}
+        submitButtonText={'Создать'}
+      >
+        <input
+          id="title"
+          className="popup__input-text"
+          type="text"
+          placeholder="Название"
+          minLength="2"
+          maxLength="30"
+          required
+        />
+        <span id="title-error" className="popup__input-error"></span>
+        <input
+          id="link"
+          className="popup__input-text"
+          type="url"
+          placeholder="Ссылка на картинку"
+          required
+        />
+        <span id="link-error" className="popup__input-error"></span>
+      </PopupWithForm>
+
+      <PopupWithForm
+        name={'trash-accept'}
+        title={'Вы уверены?'}
+        submitButtonText={'Да'}
+      />
+    </>
   );
 }
 

@@ -1,21 +1,21 @@
-function Card(props) {
+function Card({card, onCardClick}) {
   return (
-    <>
-      <button className="card__trash button-hover"></button>
+    <li className="card">
+      <button className="card__trash button-hover" />
       <img
         className="card__pic"
-        src={props.card.link}
-        alt={props.card.name}
-        onClick={() => props.onCardClick(props.card)}
+        src={card.link}
+        alt={card.name}
+        onClick={() => onCardClick(card)}
       />
       <div className="card__info">
-        <p className="card__name">{props.card.name}</p>
+        <p className="card__name">{card.name}</p>
         <div className="card__likes">
-          <button className="card__like button-hover"></button>
-          <p className="card__likes-number"></p>
+          <button className="card__like button-hover" />
+          <p className="card__likes-number">{card.likes.length}</p>
         </div>
       </div>
-    </>
+    </li>
   )
 }
 
