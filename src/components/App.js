@@ -4,7 +4,7 @@ import Header from "./Header.js";
 import Main from "./Main.js";
 import Footer from "./Footer.js";
 
-import ImagePopap from "./ImagePopup.js";
+import ImagePopup from "./ImagePopup.js";
 import PopupWithForm from "./PopupWithForm.js";
 
 function App() {
@@ -50,7 +50,7 @@ function App() {
 
               {/*  Popups  */}
 
-    <ImagePopap card={selectedCard} onClose={closeAllPopups} />
+    <ImagePopup card={selectedCard} onClose={closeAllPopups} />
 
     <PopupWithForm
       name={'avatar'}

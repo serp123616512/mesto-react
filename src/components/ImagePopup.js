@@ -1,6 +1,6 @@
 import React from "react";
 
-function ImagePopap(props) {
+function ImagePopup(props) {
   return (
     <section id="picture" className={`popup popup_dark ${props.card.link ? 'popup_opened' : ''}`}>
       <div className="popup__container-pic">
@@ -12,4 +12,4 @@ function ImagePopap(props) {
   )
 };
 
-export default ImagePopap;
+export default ImagePopup;
