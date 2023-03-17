@@ -1,25 +1,20 @@
-import React, { useEffect } from "react";
+import React from "react";
+
+import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
 import Card from "./Card.js";
 
-import { api } from "../utils/api.js";
-
-function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
-  const [userAvatar, setUserAvatar] = React.useState('');
-  const [userName, setUserName] = React.useState('');
-  const [userDescription, setUserDescription] = React.useState('');
-  const [cards, setCards] = React.useState([]);
-
-  useEffect(() => {
-    Promise.all([api.getUserData(), api.getCardData()])
-    .then(([userData, cardData]) => {
-      setUserAvatar(userData.avatar);
-      setUserName(userData.name);
-      setUserDescription(userData.about);
-      setCards(cardData);
-    })
-    .catch(console.log);
-  }, []);
+function Main({
+    onEditAvatar,
+    onEditProfile,
+    onAddPlace,
+    cards,
+    onCardClick,
+    onTrashClick,
+    onCardLike,
+    onCardDislike
+  }) {
+  const currentUser = React.useContext(CurrentUserContext);
 
   return (
     <main className="content">
@@ -28,14 +23,14 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
           <div className="profile__avatar-wrapper">
             <img
               className="profile__avatar"
-              src={userAvatar}
+              src={currentUser.avatar}
               alt="Твой аватар."
               onClick={onEditAvatar} />
           </div>
           <div className="profile__intro">
-            <p className="profile__name">{userName}</p>
+            <p className="profile__name">{currentUser.name}</p>
             <button className="profile__edit-btn button-hover" onClick={onEditProfile} />
-            <p className="profile__vocation">{userDescription}</p>
+            <p className="profile__vocation">{currentUser.about}</p>
           </div>
         </div>
         <button className="profile__add-btn button-hover" onClick={onAddPlace} />
@@ -48,6 +43,9 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
                 key={card._id}
                 card={card}
                 onCardClick={onCardClick}
+                onTrashClick={onTrashClick}
+                onCardLike={onCardLike}
+                onCardDislike={onCardDislike}
               />
             )
           })}
