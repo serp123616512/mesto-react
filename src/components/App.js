@@ -12,7 +12,7 @@ import EditProfilePopup from "./EditProfilePopup.js";
 import AddPlacePopup from "./AddPlacePopup.js";
 import AcceptDeleteCardPopup from "./AcceptDeleteCardPopup.js";
 
-import { api } from "../utils/api.js";
+import api from "../utils/api.js";
 
 function App() {
   const [currentUser, setCurrentUser] = React.useState({});
