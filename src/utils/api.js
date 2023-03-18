@@ -43,12 +43,12 @@ class Api {
     })
   }
 
-  postCard({name, link}) {
+  postCard({title, link}) {
     return this._request(this._baseUrl + '/cards', {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
-        name: name,
+        name: title,
         link: link,
       })
     })

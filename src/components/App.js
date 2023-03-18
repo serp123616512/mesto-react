@@ -45,11 +45,12 @@ function App() {
     setAcceptDeleteCardPopupOpen(cardId);
   }
 
-  function handleSubmitEditAvatarPopup({avatar}) {
+  function handleUpdateAvatar({avatar}) {
     api
     .patchUserAvatar({avatar})
     .then(user => {
       setCurrentUser(user);
+      closeAllPopups();
     })
     .catch(console.log);
   }
@@ -64,19 +65,31 @@ function App() {
     .catch(console.log);
   }
 
-  function handleSubmitAddPlacePopup() {
-
+  function handleAddPlace({title, link}) {
+    api
+    .postCard({title, link})
+    .then(newCard => {
+      setCards([newCard, ...cards]);
+      closeAllPopups();
+    })
+    .catch(console.log);
   }
 
-  function handleSubmitAcceptDeleteCardPopup() {
-
+  function handleAcceptDeleteCard(cardId) {
+    api
+    .deleteCard(cardId)
+    .then(() => {
+      setCards(cards => cards.filter((c) => c._id !== cardId));
+      closeAllPopups();
+    })
+    .catch(console.log);
   }
 
   function handleCardLike(cardId) {
     api
     .putLike(cardId)
     .then(newCard => {
-      setCards(cards => cards.map(card => card._id === cardId ? newCard : card));
+      setCards(cards => cards.map(c => c._id === cardId ? newCard : c));
     })
     .catch(console.log);
   }
@@ -85,7 +98,7 @@ function App() {
     api
     .deleteLike(cardId)
     .then(newCard => {
-      setCards(cards => cards.map(card => card._id === cardId ? newCard : card));
+      setCards(cards => cards.map(c => c._id === cardId ? newCard : c));
     })
     .catch(console.log);
   }
@@ -129,7 +142,7 @@ function App() {
       <EditAvatarPopup
         isOpen={isEditAvatarPopupOpen}
         onClose={closeAllPopups}
-        onSubmit={handleSubmitEditAvatarPopup}
+        onUpdateUser={handleUpdateAvatar}
       />
       <EditProfilePopup
         isOpen={isEditProfilePopupOpen}
@@ -139,12 +152,12 @@ function App() {
       <AddPlacePopup
         isOpen={isAddPlacePopupOpen}
         onClose={closeAllPopups}
-        onSubmit={handleSubmitAddPlacePopup}
+        onAddPlace={handleAddPlace}
       />
       <AcceptDeleteCardPopup
         isOpen={isAcceptDeleteCardPopupOpen}
         onClose={closeAllPopups}
-        onSubmit={handleSubmitAcceptDeleteCardPopup}
+        onAcceptDeleteCard={handleAcceptDeleteCard}
       />
     </CurrentUserContext.Provider>
   );

@@ -2,8 +2,15 @@ import React from "react";
 
 import PopupWithForm from "./PopupWithForm.js";
 
-function AcceptDeleteCardPopup({isOpen, onClose, onSubmit}) {
+function AcceptDeleteCardPopup({isOpen, onClose, onAcceptDeleteCard}) {
 
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    onAcceptDeleteCard(isOpen);
+
+    e.target.reset();
+  }
 
   return (
     <PopupWithForm
@@ -11,7 +18,7 @@ function AcceptDeleteCardPopup({isOpen, onClose, onSubmit}) {
       title={'Вы уверены?'}
       isOpen={isOpen}
       onClose={onClose}
-      onSubmit={onSubmit}
+      onSubmit={handleSubmit}
       submitButtonText={'Да'}
     />
   )

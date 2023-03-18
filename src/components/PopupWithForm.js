@@ -1,14 +1,32 @@
 import React from "react";
 
-function PopupWithForm({name, title, isOpen, onClose, onSubmit, children, submitButtonText}) {
+function PopupWithForm({
+    name,
+    title,
+    isOpen,
+    onClose,
+    onSubmit,
+    children,
+    submitButtonText
+  }) {
+
+  const form = React.useRef('')
+
   return (
     <section id={name} className={`popup ${isOpen ? 'popup_opened' : ''}`}>
       <div className="popup__container">
-        <button className="popup__close-btn button-hover" onClick={onClose} />
+        <button
+          className="popup__close-btn button-hover"
+          onClick={() => {
+            onClose();
+            form.current.reset();
+          }}
+        />
         <form
           name={`${name}-form`}
           className="popup__content"
           onSubmit={onSubmit}
+          ref={form}
         >
           <h1 className="popup__heading">{title}</h1>
           {children}
