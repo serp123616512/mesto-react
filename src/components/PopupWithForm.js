@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 
 function PopupWithForm({
     name,
@@ -10,7 +10,7 @@ function PopupWithForm({
     submitButtonText
   }) {
 
-  const form = React.useRef('')
+  const form = useRef('')
 
   return (
     <section id={name} className={`popup ${isOpen ? 'popup_opened' : ''}`}>

@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useRef } from "react";
 
 import PopupWithForm from "./PopupWithForm.js";
 
 function EditAvatarPopup({isOpen, onClose, onUpdateUser}) {
-  const avatar = React.useRef('')
+  const avatar = useRef('')
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -17,12 +17,12 @@ function EditAvatarPopup({isOpen, onClose, onUpdateUser}) {
 
   return (
     <PopupWithForm
-      name={'avatar'}
-      title={'Обновить аватар'}
+      name="avatar"
+      title="Обновить аватар"
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
-      submitButtonText={'Сохранить'}
+      submitButtonText="Сохранить"
     >
       <input
         id="avatar-link"
@@ -31,7 +31,7 @@ function EditAvatarPopup({isOpen, onClose, onUpdateUser}) {
         placeholder="Ссылка на новый аватар"
         required
         ref={avatar}
-        defaultValue={''}
+        defaultValue=""
       />
       <span id="avatar-link-error" className="popup__input-error"></span>
     </PopupWithForm>

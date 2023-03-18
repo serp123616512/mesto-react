@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
@@ -14,7 +14,7 @@ function Main({
     onCardLike,
     onCardDislike
   }) {
-  const currentUser = React.useContext(CurrentUserContext);
+  const currentUser = useContext(CurrentUserContext);
 
   return (
     <main className="content">
@@ -25,7 +25,8 @@ function Main({
               className="profile__avatar"
               src={currentUser.avatar}
               alt="Твой аватар."
-              onClick={onEditAvatar} />
+              onClick={onEditAvatar}
+            />
           </div>
           <div className="profile__intro">
             <p className="profile__name">{currentUser.name}</p>

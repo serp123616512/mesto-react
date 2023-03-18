@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
@@ -15,15 +15,16 @@ import AcceptDeleteCardPopup from "./AcceptDeleteCardPopup.js";
 import api from "../utils/api.js";
 
 function App() {
-  const [currentUser, setCurrentUser] = React.useState({});
-  const [cards, setCards] = React.useState([]);
+  const [currentUser, setCurrentUser] = useState({});
+  const [cards, setCards] = useState([]);
 
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
-  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-  const [isAcceptDeleteCardPopupOpen, setAcceptDeleteCardPopupOpen] = React.useState('');
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+  const [isAcceptDeleteCardPopupOpen, setAcceptDeleteCardPopupOpen] = useState(false);
+  const [cardId, setCardId] = useState('');
 
-  const [selectedCard, setSelectedCard] = React.useState({});
+  const [selectedCard, setSelectedCard] = useState({});
 
   function handleAvatarClick() {
     setIsEditAvatarPopupOpen(true);
@@ -42,7 +43,8 @@ function App() {
   }
 
   function handleTrashClick(cardId) {
-    setAcceptDeleteCardPopupOpen(cardId);
+    setAcceptDeleteCardPopupOpen(true);
+    setCardId(cardId);
   }
 
   function handleUpdateAvatar({avatar}) {
@@ -111,7 +113,7 @@ function App() {
     setAcceptDeleteCardPopupOpen('');
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     Promise.all([api.getUserData(), api.getCardData()])
     .then(([userData, cardData]) => {
       setCurrentUser(userData);
@@ -155,6 +157,7 @@ function App() {
         onAddPlace={handleAddPlace}
       />
       <AcceptDeleteCardPopup
+        cardId={cardId}
         isOpen={isAcceptDeleteCardPopupOpen}
         onClose={closeAllPopups}
         onAcceptDeleteCard={handleAcceptDeleteCard}
